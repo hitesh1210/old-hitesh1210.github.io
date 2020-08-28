@@ -1,0 +1,15 @@
+I"ä<p>DC-2 is an easy machine. This machine starts with a <code class="language-plaintext highlighter-rouge">WordPress site</code>. After brute-forcing, We find out creds on the website that we use to get an <code class="language-plaintext highlighter-rouge">ssh session</code> on the box. Priv sec to root by exploiting <code class="language-plaintext highlighter-rouge">git SUID binary</code>.</p>
+<h1 id="summary">Summary</h1>
+<ul>
+  <li>Portscan</li>
+  <li>Adding Domain to Host file</li>
+  <li>Finding users on wordpress</li>
+  <li>Creating wordlist</li>
+  <li>Bruteforce</li>
+  <li>Logging in Wordpress</li>
+  <li>SSH shell</li>
+  <li>Updating low shell to higher shell</li>
+  <li>Privilege Escalation</li>
+  <li>Getting ROOT</li>
+</ul>
+:ET

