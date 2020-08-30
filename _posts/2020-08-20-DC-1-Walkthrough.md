@@ -1,8 +1,8 @@
 ---
 layout: "post"
 title: "DC 1 Walkthrough"
-categories: [vulnhub]
-tags: dc-1
+categories: [vulnhub, DC-Series]
+tags: [dc-1 easy Drupal suid]
 ---
 DC-1 was a simple and straightforward `CVE` based box. We find the server is hosting `Drupal CMS`. I saw that Drupal version had a CVE which allowed me drop a `webshell` in webserver. Priv sec to root by exploiting `find SUID binary`. 
 

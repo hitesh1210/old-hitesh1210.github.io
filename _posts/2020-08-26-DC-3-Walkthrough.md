@@ -1,9 +1,10 @@
 ---
 layout: "post"
 title: "DC 3 Walkthrough"
-categories: [vulnhub]
+categories: [vulnhub, DC-Series]
+tags: [dc-3 easy joomla CVE]
 ---
-DC-3 was an easy machine. The website was hosted on Joomla. There was a sqli exploit that gives the admin password. By using an admin panel upload the shell. Priv sec using CVE.  
+DC-3 was an easy machine. The website was hosted on `Joomla`. There was a `sqli exploit` that gives the admin password. By using an admin panel upload the shell. Priv sec using `CVE`.  
 
 # Summery
 
