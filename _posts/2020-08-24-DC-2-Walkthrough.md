@@ -2,7 +2,7 @@
 layout: "post"
 title: "DC 2 Walkthrough"
 categories: [vulnhub, DC-Series]
-tags: [dc-2 easy wordpress suid]
+tags: [dc-2, easy, wordpress, suid]
 ---
 
 DC-2 is an easy machine. This machine starts with a `WordPress site`. After brute-forcing, We find out creds on the website that we use to get an `ssh session` on the box. Priv sec to root by exploiting `git SUID binary`.

@@ -1,0 +1,2 @@
+I")<p>DC-4 is a good beginner-friendly box. We <code class="language-plaintext highlighter-rouge">bruteforce</code> the website and get admin password. with the help of <code class="language-plaintext highlighter-rouge">OS command injection</code> vulnerability get shell on box. The old-password list gives password of user jim and mail from charles gives another password. We get root by adding user in <code class="language-plaintext highlighter-rouge">/etc/passwd</code> file using <code class="language-plaintext highlighter-rouge">teehee</code>.</p>
+:ET
