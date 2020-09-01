@@ -1,10 +1,14 @@
-I"”
+I"Æ
 <div id="tags" class="d-flex flex-wrap ml-xl-2 mr-xl-2">
 
 
 
 
 
+
+  <div>
+    <a class="tag" href="/tags/bruteforce/">bruteforce<span class="text-muted">1</span></a>
+  </div>
 
   <div>
     <a class="tag" href="/tags/cve/">CVE<span class="text-muted">1</span></a>
@@ -51,11 +55,19 @@
   </div>
 
   <div>
-    <a class="tag" href="/tags/medium/">medium<span class="text-muted">1</span></a>
+    <a class="tag" href="/tags/medium/">medium<span class="text-muted">2</span></a>
+  </div>
+
+  <div>
+    <a class="tag" href="/tags/nmap/">nmap<span class="text-muted">1</span></a>
   </div>
 
   <div>
     <a class="tag" href="/tags/screen/">screen<span class="text-muted">1</span></a>
+  </div>
+
+  <div>
+    <a class="tag" href="/tags/sudo/">sudo<span class="text-muted">1</span></a>
   </div>
 
   <div>
@@ -67,7 +79,7 @@
   </div>
 
   <div>
-    <a class="tag" href="/tags/wordpress/">wordpress<span class="text-muted">1</span></a>
+    <a class="tag" href="/tags/wordpress/">wordpress<span class="text-muted">2</span></a>
   </div>
 
 

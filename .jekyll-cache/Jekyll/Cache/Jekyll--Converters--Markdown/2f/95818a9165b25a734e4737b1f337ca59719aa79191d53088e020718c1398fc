@@ -17,7 +17,7 @@
             1
             category,
           
-            5
+            6
             posts
         </span>
       </span>
@@ -40,7 +40,7 @@
           <i class="far fa-folder fa-fw"></i>
           <a href="/categories/dc-series/" class="ml-1 mr-2">DC-Series</a>
           
-          <span class="text-muted small font-weight-light">5
+          <span class="text-muted small font-weight-light">6
             posts
           </span>
         </li>
