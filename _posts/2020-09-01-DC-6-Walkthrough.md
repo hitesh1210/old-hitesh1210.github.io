@@ -7,7 +7,7 @@ tags: [medium, nmap, wordpress, bruteforce, sudo]
 
 DC-6 was a medium box. First, we add the domain name in the host file to access the website. Using wpscan we find out WordPress users. We Bruteforce and log in to WordPress. With a vulnerable plugin, we get the shell on the box. After pivoting to another user with the credentials found in the things-to-do.txt, we can run `nmap` as root with Sudo and spawn a shell as root.
 
-# Summery
+# Summary
 
 - Portscan
 - Add domain to host file

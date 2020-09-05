@@ -6,7 +6,7 @@ tags: [dc-5, medium, suid, lfi, log poisoning, screen]
 ---
 DC-5 starts with discovery of a relatively obvious local file include vulnerability drives us towards a web shell via log poisoning. Once we land a shell, we search for SUID binaries and priv sec to root by exploiting screen-4.5.0 SUID binary. Enjoy this write up as much as I enjoyed writing it!
 
-# Summery
+# Summary
 - Portscan
 - Fuzzing LFI parameter
 - Reading files using LFI

@@ -5,7 +5,8 @@ categories: [vulnhub, OSCP-Like]
 tags: [medium, oscp, election, Serv-U, suid]
 ---
 It is an OSCP-like box, where the initial credentials can be found by converting binary to ascii. We found another creds in system log file. Used this creds to access ssh and priv sec to root by exploiting SUID.   
-# Summery
+
+# Summary
 - Portscan
 - Use Gobuster find directories.
 - Binary to ascii

@@ -6,7 +6,7 @@ tags: [dc-4, easy, teehee]
 ---
 DC-4 is a good beginner-friendly box. We `bruteforce` the website and get admin password. with the help of `OS command injection` vulnerability get shell on box. The old-password list gives password of user jim and mail from charles gives another password. We get root by adding user in `/etc/passwd` file using `teehee`. 
 
-# Summery
+# Summary
 - Portscan
 - Bruteforce site to get admin password
 - Command Injection

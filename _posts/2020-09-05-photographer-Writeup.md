@@ -6,7 +6,7 @@ tags: [medium, koken, smb, suid, php7.2]
 ---
 Photographer is an OSCP-like box. We found initial credentials for the Koken CMS by enumerating SMB shares. We upload a malicious php file to get a shell. In-home directory of daisa we found the user flag. We get root access by exploiting the php7.2 binary.
 
-# Summery
+# Summary
 - Portscan
 - Finding SMB Shares
 - Logging to Koken CMS
