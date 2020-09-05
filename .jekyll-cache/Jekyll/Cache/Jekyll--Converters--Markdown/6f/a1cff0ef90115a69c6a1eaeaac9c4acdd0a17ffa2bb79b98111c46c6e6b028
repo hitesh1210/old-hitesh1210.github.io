@@ -1,4 +1,4 @@
-I"æ
+I"	
 <div class="card categories">
     <!-- top-category -->
     <div class="card-header d-flex justify-content-between hide-border-bottom" id="h_0">
@@ -14,10 +14,10 @@
         
         <span class="text-muted small font-weight-light">
           
-            1
-            category,
+            2
+            categories,
           
-            6
+            8
             posts
         </span>
       </span>
@@ -41,6 +41,15 @@
           <a href="/categories/dc-series/" class="ml-1 mr-2">DC-Series</a>
           
           <span class="text-muted small font-weight-light">6
+            posts
+          </span>
+        </li>
+        
+        <li class="list-group-item">
+          <i class="far fa-folder fa-fw"></i>
+          <a href="/categories/oscp-like/" class="ml-1 mr-2">OSCP-Like</a>
+          
+          <span class="text-muted small font-weight-light">2
             posts
           </span>
         </li>

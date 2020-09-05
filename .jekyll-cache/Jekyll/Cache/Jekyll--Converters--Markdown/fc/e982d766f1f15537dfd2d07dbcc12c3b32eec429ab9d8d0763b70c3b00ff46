@@ -1,4 +1,4 @@
-I"(<div id="archives" class="pl-xl-2">
+I"&<div id="archives" class="pl-xl-2">
 
   
   
@@ -7,6 +7,34 @@
     
   <span class="lead">2020</span>
   <ul class="list-unstyled">
+  
+    <li>
+      <div>
+        
+        
+        <span class="date day">05</span>
+        <span class="date month small text-muted">Sep</span>
+        <a href="/posts/photographer-Writeup/"> Photographer: 1 Vulnhub Writeup</a>
+      </div>
+    </li>
+  
+
+  
+  
+  
+    <li>
+      <div>
+        
+        
+        <span class="date day">04</span>
+        <span class="date month small text-muted">Sep</span>
+        <a href="/posts/Election-Walkthrough/">Election Walkthrough</a>
+      </div>
+    </li>
+  
+
+  
+  
   
     <li>
       <div>

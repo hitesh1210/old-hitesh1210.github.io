@@ -1,0 +1,13 @@
+I"þ<p>It is an OSCP-like box, where the initial credentials can be found by converting binary to ascii. We found another creds in system log file. Used this creds to access ssh and priv sec to root by exploiting SUID.</p>
+<h1 id="summery">Summery</h1>
+<ul>
+  <li>Portscan</li>
+  <li>Use Gobuster find directories.</li>
+  <li>Binary to ascii</li>
+  <li>Login to election admin panel.</li>
+  <li>Finding creds in log file</li>
+  <li>SSH to box</li>
+  <li>Priv sec to root using SUID</li>
+  <li>Root Flag</li>
+</ul>
+:ET

@@ -1,4 +1,5 @@
-I"Æ
+I""
+
 <div id="tags" class="d-flex flex-wrap ml-xl-2 mr-xl-2">
 
 
@@ -43,7 +44,15 @@
   </div>
 
   <div>
+    <a class="tag" href="/tags/election/">election<span class="text-muted">1</span></a>
+  </div>
+
+  <div>
     <a class="tag" href="/tags/joomla/">joomla<span class="text-muted">1</span></a>
+  </div>
+
+  <div>
+    <a class="tag" href="/tags/koken/">koken<span class="text-muted">1</span></a>
   </div>
 
   <div>
@@ -55,7 +64,7 @@
   </div>
 
   <div>
-    <a class="tag" href="/tags/medium/">medium<span class="text-muted">2</span></a>
+    <a class="tag" href="/tags/medium/">medium<span class="text-muted">4</span></a>
   </div>
 
   <div>
@@ -63,7 +72,23 @@
   </div>
 
   <div>
+    <a class="tag" href="/tags/oscp/">oscp<span class="text-muted">1</span></a>
+  </div>
+
+  <div>
+    <a class="tag" href="/tags/php7.2/">php7.2<span class="text-muted">1</span></a>
+  </div>
+
+  <div>
     <a class="tag" href="/tags/screen/">screen<span class="text-muted">1</span></a>
+  </div>
+
+  <div>
+    <a class="tag" href="/tags/serv-u/">Serv-U<span class="text-muted">1</span></a>
+  </div>
+
+  <div>
+    <a class="tag" href="/tags/smb/">smb<span class="text-muted">1</span></a>
   </div>
 
   <div>
@@ -71,7 +96,7 @@
   </div>
 
   <div>
-    <a class="tag" href="/tags/suid/">suid<span class="text-muted">3</span></a>
+    <a class="tag" href="/tags/suid/">suid<span class="text-muted">4</span></a>
   </div>
 
   <div>
