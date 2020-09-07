@@ -1,0 +1,2 @@
+I"³<p>Healthcare is an OSCP-like box. It starts with finding hidden dir <code class="language-plaintext highlighter-rouge">openemr</code>. Using SQL injection vulnerability in the web application I dump the database credentials. I can log in to FTP because the user re-used the same credentials. I land a shell by uploading a shell to the server using FTP. Priv esc to root by exploiting a path hijack vulnerability in a SUID binary.</p>
+:ET

@@ -4,7 +4,7 @@ title: "Election Walkthrough"
 categories: [vulnhub, OSCP-Like]
 tags: [medium, oscp, election, Serv-U, suid]
 ---
-It is an OSCP-like box, where the initial credentials can be found by converting binary to ascii. We found another creds in system log file. Used this creds to access ssh and priv sec to root by exploiting SUID.   
+It is an OSCP-like box, where the initial credentials can be found by converting binary to ascii. We found another creds in system log file. Used this creds to access ssh and priv esc to root by exploiting SUID.   
 
 # Summary
 - Portscan
@@ -13,7 +13,7 @@ It is an OSCP-like box, where the initial credentials can be found by converting
 - Login to election admin panel.
 - Finding creds in log file
 - SSH to box
-- Priv sec to root using SUID
+- Priv esc to root using SUID
 - Root Flag
 
 # Portscan
@@ -110,7 +110,7 @@ Welcome to Ubuntu 18.04.4 LTS (GNU/Linux 5.3.0-46-generic x86_64)
 28 updates are security updates.
 ```
 
-# Priv sec to root
+# Priv esc to root
 While checking SUID files, `/usr/local/Serv-U/Serv-U` seem suspicious to me.
 ```
 love@election:~$ find / -perm -4000 2>/dev/null

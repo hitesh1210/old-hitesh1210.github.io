@@ -4,7 +4,7 @@ title: "DC 5 Walkthrough"
 categories: [vulnhub, DC-Series]
 tags: [dc-5, medium, suid, lfi, log poisoning, screen]
 ---
-DC-5 starts with discovery of a relatively obvious local file include vulnerability drives us towards a web shell via log poisoning. Once we land a shell, we search for SUID binaries and priv sec to root by exploiting screen-4.5.0 SUID binary. Enjoy this write up as much as I enjoyed writing it!
+DC-5 starts with discovery of a relatively obvious local file include vulnerability drives us towards a web shell via log poisoning. Once we land a shell, we search for SUID binaries and priv esc to root by exploiting screen-4.5.0 SUID binary. Enjoy this write up as much as I enjoyed writing it!
 
 # Summary
 - Portscan
@@ -145,7 +145,7 @@ www-data@dc-5:~/html$ ^Z
 
 www-data@dc-5:~/html$ export TERM=xterm
 ```
-# Privsec to Root
+# Privesc to Root
 
 Looking at SUID files, `/bin/screen-4.5.0` seem suspicious to me.
 ```

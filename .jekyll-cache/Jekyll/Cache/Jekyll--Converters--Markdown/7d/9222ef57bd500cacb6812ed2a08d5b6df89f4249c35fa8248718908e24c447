@@ -1,0 +1,2 @@
+I"Ò<p>DC-1 was a simple and straightforward <code class="language-plaintext highlighter-rouge">CVE</code> based box. We find the server is hosting <code class="language-plaintext highlighter-rouge">Drupal CMS</code>. I saw that Drupal version had a CVE which allowed me drop a <code class="language-plaintext highlighter-rouge">webshell</code> in webserver. Priv esc to root by exploiting <code class="language-plaintext highlighter-rouge">find SUID binary</code>.</p>
+:ET

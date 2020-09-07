@@ -145,7 +145,7 @@ username : charles
 Password : ^xHhA&hvim0y
 ```
 
-# Privsec to root
+# Privesc to root
 Now I checked the sudoers list and found that I can run teehee command without password.
 
 ```

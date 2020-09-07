@@ -5,7 +5,7 @@ categories: [vulnhub, DC-Series]
 tags: [dc-2, easy, wordpress, suid]
 ---
 
-DC-2 is an easy machine. This machine starts with a `WordPress site`. After brute-forcing, We find out creds on the website that we use to get an `ssh session` on the box. Priv sec to root by exploiting `git SUID binary`.
+DC-2 is an easy machine. This machine starts with a `WordPress site`. After brute-forcing, We find out creds on the website that we use to get an `ssh session` on the box. Priv esc to root by exploiting `git SUID binary`.
 # Summary
 - Portscan
 - Adding Domain to Host file

@@ -2,7 +2,7 @@
 layout: "post"
 title: " Photographer: 1 Vulnhub Writeup"
 categories: [vulnhub, OSCP-Like]
-tags: [medium, koken, smb, suid, php7.2]
+tags: [medium, koken, smb, suid, php7.2, oscp]
 ---
 Photographer is an OSCP-like box. We found initial credentials for the Koken CMS by enumerating SMB shares. We upload a malicious php file to get a shell. In-home directory of daisa we found the user flag. We get root access by exploiting the php7.2 binary.
 
@@ -171,7 +171,7 @@ In home directory of `daisa` we get `user flag`.
 www-data@photographer:/home/daisa$ cat user.txt 
 d41d8cd98f00b204e9800998ecf8427e
 ```
-# Privsec 
+# Privesc
 Looking at SUID files, `/usr/bin/php7.2` seem suspicious to me.
 ```
 www-data@photographer:/tmp$ find / -perm -u=s -type f 2>/dev/null

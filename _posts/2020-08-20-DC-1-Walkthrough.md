@@ -4,7 +4,7 @@ title: "DC 1 Walkthrough"
 categories: [vulnhub, DC-Series]
 tags: [dc-1, easy, Drupal, suid]
 ---
-DC-1 was a simple and straightforward `CVE` based box. We find the server is hosting `Drupal CMS`. I saw that Drupal version had a CVE which allowed me drop a `webshell` in webserver. Priv sec to root by exploiting `find SUID binary`. 
+DC-1 was a simple and straightforward `CVE` based box. We find the server is hosting `Drupal CMS`. I saw that Drupal version had a CVE which allowed me drop a `webshell` in webserver. Priv esc to root by exploiting `find SUID binary`. 
 
 # Summary
 - Portscan
@@ -67,7 +67,7 @@ Now I have meterpreter so tried to launch shell and run the commands but due to 
 
 ![nc_shell](/assets/img/dc-1/nc-shell.png)
 
-# Privsec to Root
+# Privesc to Root
 
 After some enumeration I noticed that ```find``` has SUID bit set, we can run the commands as root.
 With one simple command we get root.

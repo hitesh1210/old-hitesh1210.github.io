@@ -1,0 +1,2 @@
+I"g<p>DC-3 was an easy machine. The website was hosted on <code class="language-plaintext highlighter-rouge">Joomla</code>. There was a <code class="language-plaintext highlighter-rouge">sqli exploit</code> that gives the admin password. By using an admin panel upload the shell. Priv esc using <code class="language-plaintext highlighter-rouge">CVE</code>.</p>
+:ET
