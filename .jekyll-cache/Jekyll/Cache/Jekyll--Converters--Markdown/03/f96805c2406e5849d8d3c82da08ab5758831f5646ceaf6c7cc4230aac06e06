@@ -1,0 +1,14 @@
+I"M<p>Torment is enumeration focued box. It’s like collecting pieces and forming a picture. We get ssh private key from ftp server, usernames from port 631 and 25, and password from Ngircd. With this information we log in as user patrick. We escalate to another user using apache2.conf and priv esc to root by using python binary.</p>
+<h1 id="summary">Summary</h1>
+<ul>
+  <li>Portscan</li>
+  <li>FTP Enumeration</li>
+  <li>Finding users</li>
+  <li>Validating users using SMTP</li>
+  <li>Finding password</li>
+  <li>SSH</li>
+  <li>User Patrick</li>
+  <li>User Qiu</li>
+  <li>Flag</li>
+</ul>
+:ET
