@@ -1,3 +1,0 @@
-I"­<p>M87 was an easy box. It start with finding directories. Then we fuzz the hidden parameters. <code class="language-plaintext highlighter-rouge">id</code> parameter was vulnerable to <code class="language-plaintext highlighter-rouge">sqli</code> and <code class="language-plaintext highlighter-rouge">file</code> vulnerable to <code class="language-plaintext highlighter-rouge">LFI</code>. With this two vulnerabilities we find out usernames and passwords. Using port 9090 we get the shell on box. Privesc to root by using <code class="language-plaintext highlighter-rouge">capabilities</code>. In this blog I tried to explain how to dump data manually.</p>
-<h1 id="recon">Recon</h1>
-:ET

