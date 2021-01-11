@@ -1,4 +1,4 @@
-I"
+I"ˆ
 <div id="tags" class="d-flex flex-wrap ml-xl-2 mr-xl-2">
 
 
@@ -55,11 +55,11 @@
   </div>
 
   <div>
-    <a class="tag" href="/tags/lfi/">lfi<span class="text-muted">2</span></a>
+    <a class="tag" href="/tags/lfi/">lfi<span class="text-muted">3</span></a>
   </div>
 
   <div>
-    <a class="tag" href="/tags/log-poisoning/">log poisoning<span class="text-muted">1</span></a>
+    <a class="tag" href="/tags/log-poisoning/">log poisoning<span class="text-muted">2</span></a>
   </div>
 
   <div>
@@ -104,6 +104,10 @@
 
   <div>
     <a class="tag" href="/tags/sqli/">sqli<span class="text-muted">2</span></a>
+  </div>
+
+  <div>
+    <a class="tag" href="/tags/subdomain/">subdomain<span class="text-muted">1</span></a>
   </div>
 
   <div>
