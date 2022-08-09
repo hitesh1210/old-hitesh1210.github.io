@@ -1,0 +1,3 @@
+I"™<p>Late is the HackTheBox easy box. Which start with finding the subdomain. The subdomain has upload option, which converts the image to text. It is vulnerbale to STTI.Using it we get the RCE. For privilege escalation, we are required to enumerate files in the victim machine owned by the user and modify a script that will be executed by root whenever we SSH into the machine.</p>
+<h1 id="recon">Recon:</h1>
+:ET
