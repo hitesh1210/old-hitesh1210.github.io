@@ -1,6 +1,3 @@
-[submodule "/"]
-	path = /
-	url = https://github.com/hitesh1210/hitesh1210.github.io
 [submodule "chirpy-static-assets"]
 	path = chirpy-static-assets
 	url = https://github.com/cotes2020/chirpy-static-assets
