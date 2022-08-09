@@ -46,16 +46,17 @@
 <meta property="og:locale" content="en" />
 <meta name="description" content="To solve Cybox 1.1, we’ll find subdomains. First, we create the user on the register.cybox.company subdomain, then with the email id of the created user we create another account on monitor.cybox.company. This subdomain has a password reset option. We used that option to reset the password of admin. Admin panel has LFI vulnerability drives us towards a web shell via log poisoning. Once we land a shell, we search for SUID binaries and priv esc to root by creating the sudo user." />
 <meta property="og:description" content="To solve Cybox 1.1, we’ll find subdomains. First, we create the user on the register.cybox.company subdomain, then with the email id of the created user we create another account on monitor.cybox.company. This subdomain has a password reset option. We used that option to reset the password of admin. Admin panel has LFI vulnerability drives us towards a web shell via log poisoning. Once we land a shell, we search for SUID binaries and priv esc to root by creating the sudo user." />
-<link rel="canonical" href="http://localhost:4000/posts/Cybox-1.1-Vulnhub-Writeup/" />
-<meta property="og:url" content="http://localhost:4000/posts/Cybox-1.1-Vulnhub-Writeup/" />
+<link rel="canonical" href="http://0.0.0.0:4000/posts/Cybox-1.1-Vulnhub-Writeup/" />
+<meta property="og:url" content="http://0.0.0.0:4000/posts/Cybox-1.1-Vulnhub-Writeup/" />
 <meta property="og:site_name" content="Hitesh Blogs" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-01-10T00:00:00+08:00" />
+<meta property="article:published_time" content="2021-01-10T00:00:00+05:30" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Cybox:1.1 Vulnhub Writeup" />
 <meta name="twitter:site" content="@KaduHitesh" />
+<meta name="google-site-verification" content="ItvQFdWvxg9RSInP6DTa5nXkEbHX9L4QPLrpJLXue7A" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2021-01-10T00:00:00+08:00","datePublished":"2021-01-10T00:00:00+08:00","description":"To solve Cybox 1.1, we’ll find subdomains. First, we create the user on the register.cybox.company subdomain, then with the email id of the created user we create another account on monitor.cybox.company. This subdomain has a password reset option. We used that option to reset the password of admin. Admin panel has LFI vulnerability drives us towards a web shell via log poisoning. Once we land a shell, we search for SUID binaries and priv esc to root by creating the sudo user.","headline":"Cybox:1.1 Vulnhub Writeup","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Cybox-1.1-Vulnhub-Writeup/"},"url":"http://localhost:4000/posts/Cybox-1.1-Vulnhub-Writeup/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2021-01-10T00:00:00+05:30","datePublished":"2021-01-10T00:00:00+05:30","description":"To solve Cybox 1.1, we’ll find subdomains. First, we create the user on the register.cybox.company subdomain, then with the email id of the created user we create another account on monitor.cybox.company. This subdomain has a password reset option. We used that option to reset the password of admin. Admin panel has LFI vulnerability drives us towards a web shell via log poisoning. Once we land a shell, we search for SUID binaries and priv esc to root by creating the sudo user.","headline":"Cybox:1.1 Vulnhub Writeup","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/posts/Cybox-1.1-Vulnhub-Writeup/"},"url":"http://0.0.0.0:4000/posts/Cybox-1.1-Vulnhub-Writeup/"}</script>
 <!-- End Jekyll SEO tag -->
 
   
@@ -1992,7 +1993,7 @@
 
 
 <em class=""
-    data-ts="1610208000"
+    data-ts="1610217000"
     data-df="ll"
     data-toggle="tooltip" data-placement="bottom">
   Jan 10, 2021
@@ -2717,6 +2718,7 @@ Maildir  root.txt
   <div class="post-meta mb-3">
     <i class="far fa-folder-open fa-fw mr-1"></i>
     
+      <a href='/categories/jekyll-theme-chirpy-5-2-1/'>jekyll-theme-chirpy-5.2.1</a>,
       <a href='/categories/vulnhub/'>vulnhub</a>,
       <a href='/categories/medium/'>Medium</a>
   </div>
@@ -2769,19 +2771,19 @@ Maildir  root.txt
 
     
       
-        <a href="https://twitter.com/intent/tweet?text=Cybox%3A1.1+Vulnhub+Writeup+-+Hitesh+Blogs&url=http%3A%2F%2Flocalhost%3A4000%2Fposts%2FCybox-1.1-Vulnhub-Writeup%2F" data-toggle="tooltip" data-placement="top"
+        <a href="https://twitter.com/intent/tweet?text=Cybox%3A1.1+Vulnhub+Writeup+-+Hitesh+Blogs&url=http%3A%2F%2F0.0.0.0%3A4000%2Fposts%2FCybox-1.1-Vulnhub-Writeup%2F" data-toggle="tooltip" data-placement="top"
           title="Twitter" target="_blank" rel="noopener" aria-label="Twitter">
           <i class="fa-fw fab fa-twitter"></i>
         </a>
     
       
-        <a href="https://www.facebook.com/sharer/sharer.php?title=Cybox%3A1.1+Vulnhub+Writeup+-+Hitesh+Blogs&u=http%3A%2F%2Flocalhost%3A4000%2Fposts%2FCybox-1.1-Vulnhub-Writeup%2F" data-toggle="tooltip" data-placement="top"
+        <a href="https://www.facebook.com/sharer/sharer.php?title=Cybox%3A1.1+Vulnhub+Writeup+-+Hitesh+Blogs&u=http%3A%2F%2F0.0.0.0%3A4000%2Fposts%2FCybox-1.1-Vulnhub-Writeup%2F" data-toggle="tooltip" data-placement="top"
           title="Facebook" target="_blank" rel="noopener" aria-label="Facebook">
           <i class="fa-fw fab fa-facebook-square"></i>
         </a>
     
       
-        <a href="https://t.me/share/url?url=http%3A%2F%2Flocalhost%3A4000%2Fposts%2FCybox-1.1-Vulnhub-Writeup%2F&text=Cybox%3A1.1+Vulnhub+Writeup+-+Hitesh+Blogs" data-toggle="tooltip" data-placement="top"
+        <a href="https://t.me/share/url?url=http%3A%2F%2F0.0.0.0%3A4000%2Fposts%2FCybox-1.1-Vulnhub-Writeup%2F&text=Cybox%3A1.1+Vulnhub+Writeup+-+Hitesh+Blogs" data-toggle="tooltip" data-placement="top"
           title="Telegram" target="_blank" rel="noopener" aria-label="Telegram">
           <i class="fa-fw fab fa-telegram"></i>
         </a>
@@ -2826,6 +2828,40 @@ Maildir  root.txt
 
 
 
+
+
+
+  <div id="access-lastmod" class="post">
+    <div class="panel-heading">Recently Updated</div>
+    <ul class="post-content pl-0 pb-1 ml-1 mt-2">
+      
+        
+        
+        
+      <li><a href="/posts/HackTheBox-Late-WriteUp/">HackTheBox: Late WriteUp</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/Cybox-1.1-Vulnhub-Writeup/">Cybox:1.1 Vulnhub Writeup</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/M87-Vulnhub-Writeup/">M87 vulnhub Writeup</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/DC-1-Walkthrough/">DC 1 Walkthrough</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/DC-2-Walkthrough/">DC 2 Walkthrough</a></li>
+      
+    </ul>
+  </div> <!-- #access-lastmod -->
 
 
 
@@ -3828,7 +3864,167 @@ Maildir  root.txt
   
 
   
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+  
     
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
   
 
   
@@ -4004,7 +4200,44 @@ Maildir  root.txt
 
 
 <em class="small"
-    data-ts="1598803200"
+    data-ts="1598812200"
+    data-df="ll"
+    >
+  Aug 31, 2020
+</em>
+
+            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>DC 5 Walkthrough</h3>
+            <div class="text-muted small">
+              <p>
+                
+
+
+
+
+
+                DC-5 starts with discovery of a relatively obvious local file include vulnerability drives us towards a web shell via log poisoning. Once we land a shell, we search for SUID binaries and priv esc t...
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
+    
+      
+      
+      <div class="card">
+        <a href="/posts/DC-5-walkthrough/">
+          <div class="card-body">
+            <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+
+<em class="small"
+    data-ts="1598812200"
     data-df="ll"
     >
   Aug 31, 2020
@@ -4041,7 +4274,7 @@ Maildir  root.txt
 
 
 <em class="small"
-    data-ts="1606579200"
+    data-ts="1606588200"
     data-df="ll"
     >
   Nov 29, 2020
@@ -4063,43 +4296,6 @@ Maildir  root.txt
         </a>
       </div>
     
-      
-      
-      <div class="card">
-        <a href="/posts/DC-4-Walkthrough/">
-          <div class="card-body">
-            <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-
-<em class="small"
-    data-ts="1598544000"
-    data-df="ll"
-    >
-  Aug 28, 2020
-</em>
-
-            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>DC 4 Walkthrough</h3>
-            <div class="text-muted small">
-              <p>
-                
-
-
-
-
-
-                DC-4 is a good beginner-friendly box. We bruteforce the website and get admin password. with the help of OS command injection vulnerability get shell on box. The old-password list gives password of...
-              </p>
-            </div>
-          </div>
-        </a>
-      </div>
-    
     </div> <!-- .card-deck -->
   </div> <!-- #related-posts -->
 
@@ -4112,9 +4308,9 @@ Maildir  root.txt
 
 <div class="post-navigation d-flex justify-content-between">
   
-  <a href="/posts/M87-Vulnhub-Writeup/" class="btn btn-outline-primary"
+  <a href="/posts/Cybox-1.1-Vulnhub-Writeup/" class="btn btn-outline-primary"
     prompt="Older">
-    <p>M87 vulnhub Writeup</p>
+    <p>Cybox:1.1 Vulnhub Writeup</p>
   </a>
   
 

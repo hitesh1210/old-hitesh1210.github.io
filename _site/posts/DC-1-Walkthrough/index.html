@@ -46,16 +46,17 @@
 <meta property="og:locale" content="en" />
 <meta name="description" content="DC-1 was a simple and straightforward CVE based box. We find the server is hosting Drupal CMS. I saw that Drupal version had a CVE which allowed me drop a webshell in webserver. Priv esc to root by exploiting find SUID binary." />
 <meta property="og:description" content="DC-1 was a simple and straightforward CVE based box. We find the server is hosting Drupal CMS. I saw that Drupal version had a CVE which allowed me drop a webshell in webserver. Priv esc to root by exploiting find SUID binary." />
-<link rel="canonical" href="http://localhost:4000/posts/DC-1-Walkthrough/" />
-<meta property="og:url" content="http://localhost:4000/posts/DC-1-Walkthrough/" />
+<link rel="canonical" href="http://0.0.0.0:4000/posts/DC-1-Walkthrough/" />
+<meta property="og:url" content="http://0.0.0.0:4000/posts/DC-1-Walkthrough/" />
 <meta property="og:site_name" content="Hitesh Blogs" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-08-20T00:00:00+08:00" />
+<meta property="article:published_time" content="2020-08-20T00:00:00+05:30" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="DC 1 Walkthrough" />
 <meta name="twitter:site" content="@KaduHitesh" />
+<meta name="google-site-verification" content="ItvQFdWvxg9RSInP6DTa5nXkEbHX9L4QPLrpJLXue7A" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2020-08-20T00:00:00+08:00","datePublished":"2020-08-20T00:00:00+08:00","description":"DC-1 was a simple and straightforward CVE based box. We find the server is hosting Drupal CMS. I saw that Drupal version had a CVE which allowed me drop a webshell in webserver. Priv esc to root by exploiting find SUID binary.","headline":"DC 1 Walkthrough","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/DC-1-Walkthrough/"},"url":"http://localhost:4000/posts/DC-1-Walkthrough/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2020-08-20T00:00:00+05:30","datePublished":"2020-08-20T00:00:00+05:30","description":"DC-1 was a simple and straightforward CVE based box. We find the server is hosting Drupal CMS. I saw that Drupal version had a CVE which allowed me drop a webshell in webserver. Priv esc to root by exploiting find SUID binary.","headline":"DC 1 Walkthrough","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/posts/DC-1-Walkthrough/"},"url":"http://0.0.0.0:4000/posts/DC-1-Walkthrough/"}</script>
 <!-- End Jekyll SEO tag -->
 
   
@@ -1223,7 +1224,7 @@
 
 
 <em class=""
-    data-ts="1597852800"
+    data-ts="1597861800"
     data-df="ll"
     data-toggle="tooltip" data-placement="bottom">
   Aug 20, 2020
@@ -1392,6 +1393,7 @@ With one simple command we get root.</p>
   <div class="post-meta mb-3">
     <i class="far fa-folder-open fa-fw mr-1"></i>
     
+      <a href='/categories/jekyll-theme-chirpy-5-2-1/'>jekyll-theme-chirpy-5.2.1</a>,
       <a href='/categories/vulnhub/'>vulnhub</a>,
       <a href='/categories/dc-series/'>DC-Series</a>
   </div>
@@ -1447,19 +1449,19 @@ With one simple command we get root.</p>
 
     
       
-        <a href="https://twitter.com/intent/tweet?text=DC+1+Walkthrough+-+Hitesh+Blogs&url=http%3A%2F%2Flocalhost%3A4000%2Fposts%2FDC-1-Walkthrough%2F" data-toggle="tooltip" data-placement="top"
+        <a href="https://twitter.com/intent/tweet?text=DC+1+Walkthrough+-+Hitesh+Blogs&url=http%3A%2F%2F0.0.0.0%3A4000%2Fposts%2FDC-1-Walkthrough%2F" data-toggle="tooltip" data-placement="top"
           title="Twitter" target="_blank" rel="noopener" aria-label="Twitter">
           <i class="fa-fw fab fa-twitter"></i>
         </a>
     
       
-        <a href="https://www.facebook.com/sharer/sharer.php?title=DC+1+Walkthrough+-+Hitesh+Blogs&u=http%3A%2F%2Flocalhost%3A4000%2Fposts%2FDC-1-Walkthrough%2F" data-toggle="tooltip" data-placement="top"
+        <a href="https://www.facebook.com/sharer/sharer.php?title=DC+1+Walkthrough+-+Hitesh+Blogs&u=http%3A%2F%2F0.0.0.0%3A4000%2Fposts%2FDC-1-Walkthrough%2F" data-toggle="tooltip" data-placement="top"
           title="Facebook" target="_blank" rel="noopener" aria-label="Facebook">
           <i class="fa-fw fab fa-facebook-square"></i>
         </a>
     
       
-        <a href="https://t.me/share/url?url=http%3A%2F%2Flocalhost%3A4000%2Fposts%2FDC-1-Walkthrough%2F&text=DC+1+Walkthrough+-+Hitesh+Blogs" data-toggle="tooltip" data-placement="top"
+        <a href="https://t.me/share/url?url=http%3A%2F%2F0.0.0.0%3A4000%2Fposts%2FDC-1-Walkthrough%2F&text=DC+1+Walkthrough+-+Hitesh+Blogs" data-toggle="tooltip" data-placement="top"
           title="Telegram" target="_blank" rel="noopener" aria-label="Telegram">
           <i class="fa-fw fab fa-telegram"></i>
         </a>
@@ -1504,6 +1506,40 @@ With one simple command we get root.</p>
 
 
 
+
+
+
+  <div id="access-lastmod" class="post">
+    <div class="panel-heading">Recently Updated</div>
+    <ul class="post-content pl-0 pb-1 ml-1 mt-2">
+      
+        
+        
+        
+      <li><a href="/posts/HackTheBox-Late-WriteUp/">HackTheBox: Late WriteUp</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/Cybox-1.1-Vulnhub-Writeup/">Cybox:1.1 Vulnhub Writeup</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/M87-Vulnhub-Writeup/">M87 vulnhub Writeup</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/DC-1-Walkthrough/">DC 1 Walkthrough</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/DC-2-Walkthrough/">DC 2 Walkthrough</a></li>
+      
+    </ul>
+  </div> <!-- #access-lastmod -->
 
 
 
@@ -2649,6 +2685,166 @@ With one simple command we get root.</p>
   
 
   
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+  
+    
+  
+
+  
     
 
 
@@ -2682,7 +2878,7 @@ With one simple command we get root.</p>
 
 
 <em class="small"
-    data-ts="1598198400"
+    data-ts="1598207400"
     data-df="ll"
     >
   Aug 24, 2020
@@ -2707,7 +2903,7 @@ With one simple command we get root.</p>
       
       
       <div class="card">
-        <a href="/posts/DC-4-Walkthrough/">
+        <a href="/posts/DC-2-Walkthrough/">
           <div class="card-body">
             <!--
   Date format snippet
@@ -2719,13 +2915,13 @@ With one simple command we get root.</p>
 
 
 <em class="small"
-    data-ts="1598544000"
+    data-ts="1598207400"
     data-df="ll"
     >
-  Aug 28, 2020
+  Aug 24, 2020
 </em>
 
-            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>DC 4 Walkthrough</h3>
+            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>DC 2 Walkthrough</h3>
             <div class="text-muted small">
               <p>
                 
@@ -2734,7 +2930,7 @@ With one simple command we get root.</p>
 
 
 
-                DC-4 is a good beginner-friendly box. We bruteforce the website and get admin password. with the help of OS command injection vulnerability get shell on box. The old-password list gives password of...
+                DC-2 is an easy machine. This machine starts with a WordPress site. After brute-forcing, We find out creds on the website that we use to get an ssh session on the box. Priv esc to root by exploitin...
               </p>
             </div>
           </div>
@@ -2744,7 +2940,7 @@ With one simple command we get root.</p>
       
       
       <div class="card">
-        <a href="/posts/DC-5-walkthrough/">
+        <a href="/posts/DC-3-Walkthrough/">
           <div class="card-body">
             <!--
   Date format snippet
@@ -2756,13 +2952,13 @@ With one simple command we get root.</p>
 
 
 <em class="small"
-    data-ts="1598803200"
+    data-ts="1598380200"
     data-df="ll"
     >
-  Aug 31, 2020
+  Aug 26, 2020
 </em>
 
-            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>DC 5 Walkthrough</h3>
+            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>DC 3 Walkthrough</h3>
             <div class="text-muted small">
               <p>
                 
@@ -2771,7 +2967,12 @@ With one simple command we get root.</p>
 
 
 
-                DC-5 starts with discovery of a relatively obvious local file include vulnerability drives us towards a web shell via log poisoning. Once we land a shell, we search for SUID binaries and priv esc t...
+                DC-3 was an easy machine. The website was hosted on Joomla. There was a sqli exploit that gives the admin password. By using an admin panel upload the shell. Priv esc using CVE.
+
+Summary
+
+
+  Portsc...
               </p>
             </div>
           </div>
@@ -2790,10 +2991,10 @@ With one simple command we get root.</p>
 
 <div class="post-navigation d-flex justify-content-between">
   
-  <div class="btn btn-outline-primary disabled"
+  <a href="/posts/DC-1-Walkthrough/" class="btn btn-outline-primary"
     prompt="Older">
-    <p>-</p>
-  </div>
+    <p>DC 1 Walkthrough</p>
+  </a>
   
 
   
