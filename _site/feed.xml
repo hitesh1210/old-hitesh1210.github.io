@@ -1,1 +1,224 @@
-<feed xmlns="http://www.w3.org/2005/Atom"> <id>http://localhost:4000</id><title>h1t3sh</title><subtitle>Don't think out of box... Hack it!!!</subtitle> <updated>2022-08-09T14:59:35+05:30</updated> <author> <name>Hitesh G. Kadu</name> <uri>http://localhost:4000</uri> </author><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000" rel="alternate" type="text/html" /> <generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator> <rights> © 2022 Hitesh G. Kadu </rights> <icon>/assets/img/favicons/favicon.ico</icon> <logo>/assets/img/favicons/favicon-96x96.png</logo> <entry><title>HackTheBox: Late WriteUp</title><link href="http://localhost:4000/posts/HackTheBox-Late-WriteUp/" rel="alternate" type="text/html" title="HackTheBox: Late WriteUp" /><published>2022-08-09T00:00:00+05:30</published> <updated>2022-08-09T14:59:35+05:30</updated> <id>http://localhost:4000/posts/HackTheBox-Late-WriteUp/</id> <content src="http://localhost:4000/posts/HackTheBox-Late-WriteUp/" /> <author> <name>Hitesh G. Kadu</name> </author> <category term="HackTheBox" /> <category term="Easy" /> <summary> </summary> </entry> <entry><title>Cybox:1.1 Vulnhub Writeup</title><link href="http://localhost:4000/posts/Cybox-1.1-Vulnhub-Writeup/" rel="alternate" type="text/html" title="Cybox:1.1 Vulnhub Writeup" /><published>2021-01-10T00:00:00+05:30</published> <updated>2022-08-09T14:59:35+05:30</updated> <id>http://localhost:4000/posts/Cybox-1.1-Vulnhub-Writeup/</id> <content src="http://localhost:4000/posts/Cybox-1.1-Vulnhub-Writeup/" /> <author> <name>Hitesh G. Kadu</name> </author> <category term="vulnhub" /> <category term="Medium" /> <summary> </summary> </entry> <entry><title>M87 vulnhub Writeup</title><link href="http://localhost:4000/posts/M87-Vulnhub-Writeup/" rel="alternate" type="text/html" title="M87 vulnhub Writeup" /><published>2020-11-29T00:00:00+05:30</published> <updated>2022-08-09T14:59:35+05:30</updated> <id>http://localhost:4000/posts/M87-Vulnhub-Writeup/</id> <content src="http://localhost:4000/posts/M87-Vulnhub-Writeup/" /> <author> <name>Hitesh G. Kadu</name> </author> <category term="vulnhub" /> <category term="Easy" /> <summary> </summary> </entry> <entry><title>Digitalworld Local: TORMENT Writeup</title><link href="http://localhost:4000/posts/TORMENT-Writeup/" rel="alternate" type="text/html" title="Digitalworld Local: TORMENT Writeup" /><published>2020-09-17T00:00:00+05:30</published> <updated>2022-08-09T14:59:35+05:30</updated> <id>http://localhost:4000/posts/TORMENT-Writeup/</id> <content src="http://localhost:4000/posts/TORMENT-Writeup/" /> <author> <name>Hitesh G. Kadu</name> </author> <category term="vulnhub" /> <category term="Digitalworld Local" /> <summary> </summary> </entry> <entry><title>Healthcare Vulnhub Writeup</title><link href="http://localhost:4000/posts/Healthcare-Writeup/" rel="alternate" type="text/html" title="Healthcare Vulnhub Writeup" /><published>2020-09-06T00:00:00+05:30</published> <updated>2022-08-09T14:59:35+05:30</updated> <id>http://localhost:4000/posts/Healthcare-Writeup/</id> <content src="http://localhost:4000/posts/Healthcare-Writeup/" /> <author> <name>Hitesh G. Kadu</name> </author> <category term="vulnhub" /> <category term="OSCP-Like" /> <summary> </summary> </entry> </feed>
+
+
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>http://localhost:4000/</id>
+  <title>Hitesh Blogs</title>
+  <subtitle>Don't think out of box... Hack it!!!</subtitle>
+  <updated>2022-08-09T19:32:11+08:00</updated>
+  <author>
+    <name>Hitesh Kadu</name>
+    <uri>http://localhost:4000/</uri>
+  </author>
+  <link rel="self" type="application/atom+xml" href="http://localhost:4000/feed.xml"/>
+  <link rel="alternate" type="text/html" hreflang="en"
+    href="http://localhost:4000/"/>
+  <generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator>
+  <rights> © 2022 Hitesh Kadu </rights>
+  <icon>/assets/img/favicons/favicon.ico</icon>
+  <logo>/assets/img/favicons/favicon-96x96.png</logo>
+
+
+  
+  <entry>
+    <title>HackTheBox: Late WriteUp</title>
+    <link href="http://localhost:4000/posts/HackTheBox-Late-WriteUp/" rel="alternate" type="text/html" title="HackTheBox: Late WriteUp" />
+    <published>2022-08-09T00:00:00+08:00</published>
+  
+    <updated>2022-08-09T00:00:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/HackTheBox-Late-WriteUp/</id>
+    <content src="http://localhost:4000/posts/HackTheBox-Late-WriteUp/" />
+    <author>
+      <name>Hitesh Kadu</name>
+    </author>
+
+  
+    
+    <category term="HackTheBox" />
+    
+    <category term="Easy" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      Late is the HackTheBox easy box. Which start with finding the subdomain. The subdomain has upload option, which converts the image to text. It is vulnerbale to STTI.Using it we get the RCE. For privilege escalation, we are required to enumerate files in the victim machine owned by the user and modify a script that will be executed by root whenever we SSH into the machine.
+Recon:
+
+Nmap:
+PORT   S...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>Cybox:1.1 Vulnhub Writeup</title>
+    <link href="http://localhost:4000/posts/Cybox-1.1-Vulnhub-Writeup/" rel="alternate" type="text/html" title="Cybox:1.1 Vulnhub Writeup" />
+    <published>2021-01-10T00:00:00+08:00</published>
+  
+    <updated>2021-01-10T00:00:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/Cybox-1.1-Vulnhub-Writeup/</id>
+    <content src="http://localhost:4000/posts/Cybox-1.1-Vulnhub-Writeup/" />
+    <author>
+      <name>Hitesh Kadu</name>
+    </author>
+
+  
+    
+    <category term="vulnhub" />
+    
+    <category term="Medium" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      To solve Cybox 1.1, we’ll find subdomains. First, we create the user on the register.cybox.company subdomain, then with the email id of the created user we create another account on monitor.cybox.company. This subdomain has a password reset option. We used that option to reset the password of admin. Admin panel has LFI vulnerability drives us towards a web shell via log poisoning.
+Once we land ...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>M87 vulnhub Writeup</title>
+    <link href="http://localhost:4000/posts/M87-Vulnhub-Writeup/" rel="alternate" type="text/html" title="M87 vulnhub Writeup" />
+    <published>2020-11-29T00:00:00+08:00</published>
+  
+    <updated>2020-11-29T00:00:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/M87-Vulnhub-Writeup/</id>
+    <content src="http://localhost:4000/posts/M87-Vulnhub-Writeup/" />
+    <author>
+      <name>Hitesh Kadu</name>
+    </author>
+
+  
+    
+    <category term="vulnhub" />
+    
+    <category term="Easy" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      M87 was an easy box. It start with finding directories. Then we fuzz the hidden parameters. id parameter was vulnerable to sqli and file vulnerable to LFI. With this two vulnerabilities we find out usernames and passwords. Using port 9090 we get the shell on box. Privesc to root by using capabilities. In this blog I tried to explain how to dump data manually.
+
+Summary
+
+  Portscan
+  Running gobu...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>Digitalworld Local: TORMENT Writeup</title>
+    <link href="http://localhost:4000/posts/TORMENT-Writeup/" rel="alternate" type="text/html" title="Digitalworld Local: TORMENT Writeup" />
+    <published>2020-09-17T00:00:00+08:00</published>
+  
+    <updated>2020-09-17T00:00:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/TORMENT-Writeup/</id>
+    <content src="http://localhost:4000/posts/TORMENT-Writeup/" />
+    <author>
+      <name>Hitesh Kadu</name>
+    </author>
+
+  
+    
+    <category term="vulnhub" />
+    
+    <category term="Digitalworld Local" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      Torment is enumeration focued box. It’s like collecting pieces and forming a picture. We get ssh private key from ftp server, usernames from port 631 and 25, and password from Ngircd. With this information we log in as user patrick. We escalate to another user using apache2.conf and priv esc to root by using python binary.
+Summary
+
+  Portscan
+  FTP Enumeration
+  Finding users
+  Validating users...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>Healthcare Vulnhub Writeup</title>
+    <link href="http://localhost:4000/posts/Healthcare-Writeup/" rel="alternate" type="text/html" title="Healthcare Vulnhub Writeup" />
+    <published>2020-09-06T00:00:00+08:00</published>
+  
+    <updated>2020-09-06T00:00:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/Healthcare-Writeup/</id>
+    <content src="http://localhost:4000/posts/Healthcare-Writeup/" />
+    <author>
+      <name>Hitesh Kadu</name>
+    </author>
+
+  
+    
+    <category term="vulnhub" />
+    
+    <category term="OSCP-Like" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      Healthcare is an OSCP-like box. It starts with finding hidden dir openemr. Using SQL injection vulnerability in the web application I dump the database credentials. I can log in to FTP because the user re-used the same credentials. I land a shell by uploading a shell to the server using FTP. Priv esc to root by exploiting a path hijack vulnerability in a SUID binary.
+
+Summary
+
+  Portscan
+  Find...
+    </summary>
+  
+
+  </entry>
+
+</feed>
+
+
